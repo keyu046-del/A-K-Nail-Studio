@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Page - A&K Nail Studio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cream: #f6eee0;
+      --peach: #e8c8a0;
+      --maroon: #561c24;
+      --text-dark: #000;
+      --text-light: #fff;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--cream);
+      color: var(--text-dark);
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: var(--peach);
+      padding: 15px;
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: bold;
+      color: var(--maroon);
+    }
+    .container {
+      max-width: 800px;
+      margin: 30px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: var(--maroon);
+      text-align: center;
+    }
+    input, textarea, button {
+      display: block;
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 10px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      background-color: var(--maroon);
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background-color: #3f121a;
+    }
+    .review-card {
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 10px;
+      margin-bottom: 10px;
+      background: white;
+    }
+    .review-card img {
+      max-width: 100%;
+      border-radius: 5px;
+    }
+    #loginContainer {
+      max-width: 400px;
+      margin: 100px auto;
+      padding: 30px;
+      background: white;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    #loginContainer h2 {
+      margin-bottom: 20px;
+      color: var(--maroon);
+    }
+  </style>
+</head>
+<body>
+
+<header>Admin - A&K Nail Studio</header>
+
+<div id="loginContainer">
+  <h2>Admin Login</h2>
+  <input type="password" id="adminPassword" placeholder="Enter Admin Password" />
+  <button onclick="checkLogin()">Login</button>
+  <p id="loginError" style="color: red; margin-top: 10px;"></p>
+</div>
+
+<div id="adminContent" style="display: none;">
+  <div class="container">
+    <h1>Welcome Admin</h1>
+    <button onclick="window.open('https://docs.google.com/spreadsheets/d/1tOpSP_Yos0oP5QQf2NdUvJkHucBtQv4pZBhD4e7kC00/edit?usp=sharing', '_blank')">📋 View Booking Sheet</button>
+
+    <h2>Upload Customer Photo</h2>
+    <form id="uploadForm">
+      <input type="file" id="photo" accept="image/*" required />
+      <input type="text" id="caption" placeholder="Write a caption (optional)" />
+      <button type="submit">Upload</button>
+    </form>
+
+    <h2>Gallery</h2>
+    <div class="gallery" id="gallery"></div>
+  </div>
+</div>
+
+<script>
+  const form = document.getElementById('uploadForm');
+  const gallery = document.getElementById('gallery');
+
+  function loadGallery() {
+    gallery.innerHTML = '';
+    const reviews = JSON.parse(localStorage.getItem('photoReviews') || '[]');
+    reviews.forEach(({ image, caption }) => {
+      const div = document.createElement('div');
+      div.className = 'review-card';
+      div.innerHTML = `
+        <img src="${image}" alt="Customer photo">
+        <p>${caption || ''}</p>
+      `;
+      gallery.appendChild(div);
+    });
+  }
+
+  form?.addEventListener('submit', function (e) {
+    e.preventDefault();
+    const fileInput = document.getElementById('photo');
+    const caption = document.getElementById('caption').value;
+    const file = fileInput.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function () {
+      const imageData = reader.result;
+      const newReview = { image: imageData, caption };
+      const reviews = JSON.parse(localStorage.getItem('photoReviews') || '[]');
+      reviews.push(newReview);
+      localStorage.setItem('photoReviews', JSON.stringify(reviews));
+      form.reset();
+      loadGallery();
+    };
+    reader.readAsDataURL(file);
+  });
+
+  const ADMIN_PASSWORD = "keya123";
+  function checkLogin() {
+    const input = document.getElementById("adminPassword").value;
+    const error = document.getElementById("loginError");
+    if (input === ADMIN_PASSWORD) {
+      document.getElementById("loginContainer").style.display = "none";
+      document.getElementById("adminContent").style.display = "block";
+      loadGallery();
+    } else {
+      error.textContent = "Incorrect password. Try again.";
+    }
+  }
+</script>
+
+</body>
+</html>
