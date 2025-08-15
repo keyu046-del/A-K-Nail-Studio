@@ -1,98 +1,201 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>A&K Nail Studio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-<header>
-  <div class="logo-text">
-    A<span class="ampersand">&amp;</span>K 
-    <span class="studio-subtitle">Nail Art Studio</span>
-  </div>
-</header>
+:root {
+  --cream: #f6eee0;
+  --peach: #e8c8a0;
+  --maroon: #561c24;
+  --text-dark: #000;
+  --text-light: #fff;
+}
 
-<nav>
-  <a href="#home">Home</a>
-  <a href="#about">About</a>
-  <a href="#services">Services</a>
-  <a href="#gallery">Gallery</a>
-  <a href="#booking">Booking</a>
-  <a href="#contact">Contact</a>
-</nav>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-<section class="hero" id="home">
-  <div class="hero-image"></div>
-  <div class="hero-text">
-    <h1>Our salon brings unique nail designs</h1>
-    <p>From classy to creative, we design nails that reflect your style. Book your session today and treat yourself.</p>
-    <button onclick="window.location.href='#booking'">Book Now</button>
-  </div>
-</section>
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--cream);
+  color: var(--text-dark);
+}
 
-<section class="about" id="about">
-  <h2>About A&K Nail Art Studio</h2>
-  <p>Welcome to A&K Nail Art Studio – where your nails get pampered with love and style. Our experienced artists ensure your nails look elegant and feel amazing.</p>
-</section>
+header {
+  background-color: var(--peach);
+  padding: 20px;
+  text-align: center;
+}
 
-<section class="services" id="services">
-  <h2>Our Services & Price Range</h2>
-  <ul>
-    <li>Classic Manicure – ₹200</li>
-    <li>Gel Polish – ₹300</li>
-    <li>Acrylic Extension – ₹400</li>
-    <li>Nail Art (Per Nail) – ₹50+</li>
-  </ul>
-</section>
+.logo-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 40px;
+  color: var(--maroon);
+  letter-spacing: 2px;
+}
 
-<section class="customers" id="gallery">
-  <h2>Our Customers</h2>
-  <div class="customer-photos">
-    <img src="customer1.jpg" alt="Customer 1">
-    <img src="customer2.jpg" alt="Customer 2">
-    <img src="customer3.jpg" alt="Customer 3">
-    <img src="customer4.jpg" alt="Customer 4">
-  </div>
-</section>
+.ampersand {
+  font-family: cursive;
+  font-size: 44px;
+}
 
-<section id="booking">
-  <h2>Book Your Appointment</h2>
-  <form id="bookingForm">
-    <input type="text" name="name" placeholder="Your Name" required>
-    <input type="email" name="email" placeholder="Your Email" required>
-    <input type="tel" name="phone" placeholder="Your Phone Number" required>
-    <select name="service" required>
-      <option value="">Select Service</option>
-      <option>Classic Manicure</option>
-      <option>Gel Polish</option>
-      <option>Acrylic Extension</option>
-      <option>Nail Art</option>
-    </select>
-    <input type="time" name="time" required>
-    <button type="submit">Submit Booking</button>
-  </form>
-  <div id="confirmation"></div>
-</section>
+.studio-subtitle {
+  font-size: 18px;
+  font-weight: normal;
+  font-family: 'Poppins', sans-serif;
+}
 
-<section id="contact">
-  <h2>Contact Us</h2>
-  <form id="contactForm">
-    <input type="text" name="contactName" placeholder="Your Name" required>
-    <input type="email" name="contactEmail" placeholder="Your Email" required>
-    <textarea name="message" placeholder="Your Message" required></textarea>
-    <button type="submit">Send Message</button>
-  </form>
-  <div id="contactConfirmation"></div>
-</section>
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  background-color: var(--maroon);
+  padding: 15px;
+}
 
-<footer>
-  &copy; 2025 A&K Nail Art Studio
-  <a href="admin.html" class="hidden-admin">Admin</a>
-</footer>
+nav a {
+  color: var(--cream);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 16px;
+  transition: color 0.3s ease;
+}
 
-<script src="script.js"></script>
-</body>
-</html>
+nav a:hover {
+  text-decoration: underline;
+  color: var(--peach);
+}
+
+.hero {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  padding: 50px 20px;
+  background: linear-gradient(90deg, var(--cream) 50%, var(--peach) 50%);
+}
+
+.hero-image {
+  width: 320px;
+  height: 400px;
+  background: url('main2.jpg') no-repeat center center;
+  background-size: cover;
+  border-radius: 20px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.hero-text {
+  max-width: 400px;
+  margin-left: 30px;
+}
+
+.hero-text h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+.hero-text p {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.hero-text button {
+  padding: 12px 24px;
+  background: linear-gradient(45deg, var(--maroon), #3f121a);
+  color: var(--text-light);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: transform 0.3s ease;
+}
+
+.hero-text button:hover {
+  transform: scale(1.05);
+}
+
+section {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.about, .services, .customers {
+  background-color: #fff7f2;
+}
+
+.services ul {
+  list-style: none;
+  padding: 0;
+  font-size: 16px;
+  display: inline-block;
+  text-align: left;
+}
+
+.customer-photos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 20px;
+  justify-items: center;
+}
+
+.customer-photos img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.customer-photos img:hover {
+  transform: scale(1.05);
+}
+
+form {
+  max-width: 500px;
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+}
+
+input, select, textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button[type="submit"] {
+  background-color: var(--maroon);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+footer {
+  background: var(--maroon);
+  color: white;
+  padding: 10px;
+  position: relative;
+  text-align: center;
+  font-size: 14px;
+}
+
+footer a.hidden-admin {
+  color: transparent;
+  font-size: 1px;
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+}
+
+footer a.hidden-admin:hover {
+  color: white;
+  font-size: 12px;
+}
+
+#confirmation, #contactConfirmation {
+  text-align: center;
+  font-size: 16px;
+  color: green;
+}
